@@ -1,0 +1,20 @@
+name: Scheduled Health Check
+
+# Controls when the action will run.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "5 * * * *"
+
+jobs:
+  health_check_job:
+    runs-on: ubuntu-latest
+    name: Check all sites
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run Shell Script
+        id: shell_script_run
+        run: bash ./health_check.sh
+        env:
+          ZT_IDENTITY_PUBLIC: ${{ secrets.ZT_IDENTITY_PUBLIC }}
+          ZT_IDENTITY_SECRET: ${{ secrets.ZT_IDENTITY_SECRET }}
