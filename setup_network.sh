@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -o pipefail
+
 for i in 1 2 3 4; do
     status=$(sudo /usr/sbin/zerotier-cli info | cut -d' ' -f 5)
 	if [ "$status" == "ONLINE" ]; then
