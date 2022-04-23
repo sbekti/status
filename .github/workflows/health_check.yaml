@@ -23,7 +23,9 @@ jobs:
         run: bash ./setup_network.sh
         env:
           ZT_NETWORK_ID: ${{ secrets.ZT_NETWORK_ID }}
-          PING_TEST_IP: ${{ secrets.PING_TEST_IP }}
+          INTERN_SUBNET: ${{ secrets.INTERN_SUBNET }}
+          INTERN_GATEWAY: ${{ secrets.INTERN_GATEWAY }}
+          INTERN_DNS: ${{ secrets.INTERN_DNS }}
       - name: Teardown Network
         id: teardown_network
         run: bash ./teardown_network.sh

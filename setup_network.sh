@@ -44,6 +44,12 @@ sudo ip route add $INTERN_SUBNET via $INTERN_GATEWAY
 echo
 echo '*** Testing connectivity...'
 ping -c 4 $INTERN_GATEWAY
-ping -c 4 $PING_TEST_IP
+ping -c 4 $INTERN_DNS
+
+echo
+echo '*** Setting up DNS...'
+echo 'nameserver $INTERN_DNS' | sudo tee /etc/resolv.conf > /dev/null
+cat /etc/resolv.conf
+dig @$INTERN_DNS intern.corp.bekti.com
 
 exit 0
