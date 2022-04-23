@@ -38,6 +38,6 @@ for i in 1 2 3 4; do
 done
 
 ip a
-ping -c 4 192.168.192.43
+ping -c 4 $PING_TEST_IP
 
 exit 0

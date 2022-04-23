@@ -18,3 +18,5 @@ jobs:
         env:
           ZT_IDENTITY_PUBLIC: ${{ secrets.ZT_IDENTITY_PUBLIC }}
           ZT_IDENTITY_SECRET: ${{ secrets.ZT_IDENTITY_SECRET }}
+          ZT_NETWORK_ID: ${{ secrets.ZT_NETWORK_ID }}
+          PING_TEST_IP: ${{ secrets.PING_TEST_IP }}
