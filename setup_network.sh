@@ -37,7 +37,13 @@ for i in 1 2 3 4; do
 	fi
 done
 
-ip a
+echo
+echo '*** Adding routes...'
+sudo ip route add $INTERN_SUBNET via $INTERN_GATEWAY
+
+echo
+echo '*** Testing connectivity...'
+ping -c 4 $INTERN_GATEWAY
 ping -c 4 $PING_TEST_IP
 
 exit 0
