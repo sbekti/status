@@ -12,11 +12,18 @@ jobs:
     name: Check all sites
     steps:
       - uses: actions/checkout@v2
-      - name: Run Shell Script
-        id: shell_script_run
-        run: bash ./health_check.sh
+      - name: Install ZeroTier
+        id: install_zerotier
+        run: bash ./install_zerotier.sh
         env:
           ZT_IDENTITY_PUBLIC: ${{ secrets.ZT_IDENTITY_PUBLIC }}
           ZT_IDENTITY_SECRET: ${{ secrets.ZT_IDENTITY_SECRET }}
+      - name: Setup Network
+        id: setup_network
+        run: bash ./setup_network.sh
+        env:
           ZT_NETWORK_ID: ${{ secrets.ZT_NETWORK_ID }}
           PING_TEST_IP: ${{ secrets.PING_TEST_IP }}
+      - name: Teardown Network
+        id: teardown_network
+        run: bash ./teardown_network.sh
