@@ -1,4 +1,5 @@
 const maxDays = 30;
+const uptimeDataCollection = []
 
 async function genReportLog(container, key, url) {
   const response = await fetch("logs/" + key + "_report.log");
@@ -20,6 +21,7 @@ function constructStatusStream(key, url, uptimeData) {
   }
 
   const lastSet = uptimeData[0];
+  uptimeDataCollection.push(lastSet)
   const color = getColor(lastSet);
 
   const container = templatize("statusContainerTemplate", {
@@ -236,10 +238,36 @@ function hideTooltip() {
   }, 1000);
 }
 
+function getAvg(nums) {
+  const total = nums.reduce((acc, c) => acc + c, 0);
+  return total / nums.length;
+}
+
+function getHeadline(uptimeVal) {
+  return uptimeVal == null
+    ? "No data"
+    : uptimeVal == 1
+    ? "All Systems Operational"
+    : uptimeVal < 0.8
+    ? "Major System Outage"
+    : "Partial System Outage";
+}
+
+function getHeadlineColor(uptimeVal) {
+  return uptimeVal == null
+    ? "nodata"
+    : uptimeVal == 1
+    ? "success"
+    : uptimeVal < 0.8
+    ? "failure"
+    : "partial";
+}
+
 async function genAllReports() {
   const response = await fetch("urls.cfg");
   const configText = await response.text();
   const configLines = configText.split("\n");
+  const reports = document.getElementById("reports")
   for (let ii = 0; ii < configLines.length; ii++) {
     const configLine = configLines[ii];
     const [key, url] = configLine.split("=");
@@ -247,6 +275,12 @@ async function genAllReports() {
       continue;
     }
 
-    await genReportLog(document.getElementById("reports"), key, url);
+    await genReportLog(reports, key, url);
   }
+  const avgUptime = getAvg(uptimeDataCollection);
+  const container = templatize("overallStatusContainerTemplate", {
+    headline: getHeadline(avgUptime),
+    color: getHeadlineColor(avgUptime),
+  });
+  reports.prepend(container);
 }

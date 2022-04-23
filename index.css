@@ -136,6 +136,18 @@ footer a {
   width: 100%;
 }
 
+.overallStatusContainer {
+  border-radius: 5px;
+  padding-top: 20px;
+  text-align: left;
+  padding: 12px;
+}
+
+.overallStatusContainer + .statusContainer {
+  border-top: 1px solid #eee;
+  margin-top: 30px;
+}
+
 .statusContainer {
   border: 1px solid #ededed;
   border-radius: 5px;
@@ -194,6 +206,13 @@ footer a {
   font-size: 12px;
   font-weight: 700;
   margin-left: 12px;
+  text-shadow: 0 1px 0 rgb(0 0 0 / 10%);
+}
+
+.summaryHeadline {
+  color: #eee;
+  font-size: 1.25rem;
+  text-shadow: 0 1px 0 rgb(0 0 0 / 10%);
 }
 
 .statusUptime {
