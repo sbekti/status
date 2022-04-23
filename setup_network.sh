@@ -10,7 +10,7 @@ for i in 1 2 3 4; do
     	break
 	fi
 	echo '*** Waiting for node to become online...'
-    sleep 5
+    sleep 15
 	if [ $i -eq 4 ]; then
 		echo
 		echo '*** Giving up!'
@@ -29,7 +29,7 @@ for i in 1 2 3 4; do
     	break
 	fi
 	echo '*** Waiting for join to complete...'
-    sleep 5
+    sleep 15
 	if [ $i -eq 4 ]; then
 		echo
 		echo '*** Giving up!'
