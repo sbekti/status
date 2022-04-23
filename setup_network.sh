@@ -23,7 +23,7 @@ echo '*** Joining network...'
 sudo zerotier-cli join $ZT_NETWORK_ID
 
 for i in 1 2 3 4; do
-	if [ $(sudo /usr/sbin/zerotier-cli listnetworks | grep -q "OK") ]; then
+	if $(sudo /usr/sbin/zerotier-cli listnetworks | grep -q "OK"); then
 		echo
 		echo '*** Node has joined the network!'
     	break
