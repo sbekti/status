@@ -29,3 +29,5 @@ jobs:
       - name: Teardown Network
         id: teardown_network
         run: bash ./teardown_network.sh
+        env:
+          ZT_NETWORK_ID: ${{ secrets.ZT_NETWORK_ID }}
