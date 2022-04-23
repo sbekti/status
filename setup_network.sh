@@ -48,7 +48,7 @@ ping -c 4 $INTERN_DNS
 
 echo
 echo '*** Setting up DNS...'
-echo 'nameserver $INTERN_DNS' | sudo tee /etc/resolv.conf > /dev/null
+echo "nameserver $INTERN_DNS" | sudo tee /etc/resolv.conf > /dev/null
 cat /etc/resolv.conf
 dig @$INTERN_DNS intern.corp.bekti.com
 
