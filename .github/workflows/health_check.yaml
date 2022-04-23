@@ -26,6 +26,12 @@ jobs:
           INTERN_SUBNET: ${{ secrets.INTERN_SUBNET }}
           INTERN_GATEWAY: ${{ secrets.INTERN_GATEWAY }}
           INTERN_DNS: ${{ secrets.INTERN_DNS }}
+      - name: Health Check
+        id: health_check
+        run: bash ./health_check.sh
+        env:
+          GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
+          GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
       - name: Teardown Network
         id: teardown_network
         run: bash ./teardown_network.sh
